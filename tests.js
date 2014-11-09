@@ -34,9 +34,9 @@ var thresh = 500,
 	arr = [100, 300, 100, 50, 50, 50, 50, 50, 500, 200, 100],
 	result = subSeries.getSubSeries( arr, thresh );
 
-assert.ok( result.equals([100, 50, 50, 50, 50, 50]), "Passed! Longest series in [100, 300, 100, 50, 50, 50, 50, 50, 500, 200, 100] is [100, 50, 50, 50, 50, 50]" );
+assert.ok( result.equals([100, 50, 50, 50, 50, 50]), "Passed! Longest series in [100, 300, 100, 50, 50, 50, 50, 50, 500, 200, 100] is [100, 50, 50, 50, 50, 50]." );
 assert.ok( subSeries.reduce([50,50,100,210,200]) === 610, "Reduce function adds arrays correctly." );
-assert.ok( subSeries.getLongest(arraySet).equals( [10,10,10]), "Longest function returns  [10,10,10]" );
+assert.ok( subSeries.getLongest(arraySet).equals( [10,10,10]), "Longest function returns the longest array in a collection." );
 
 
 arr = [-100, 300, 100, 50, 50, 50, 50, 50, 500, 200, 100],
@@ -46,7 +46,7 @@ arr = [-100, 300, 100, 50, 50, 50, 50, 50, 500, 200, 100],
 		 subSeries.getSubSeries( arr, thresh );
 		 },
 		 subSeries.negativeNumberException,
- 		"raised error is an instance of subSeries.negativeNumberException"
+ 		"raised error is an instance of subSeries.negativeNumberException for the array [-100, 300, 100, 50, 50, 50, 50, 50, 500, 200, 100]."
 		 );
 
  arr = ['b', 300, 100, 50, 50, 50, 50, 50, 500, 200, 100],
@@ -56,6 +56,6 @@ arr = [-100, 300, 100, 50, 50, 50, 50, 50, 500, 200, 100],
 			 subSeries.getSubSeries( arr, thresh );
 		 },
 		 subSeries.isNaNException,
-		 "raised error is an instance of subSeries.isNaNException" );
+		 "raised error is an instance of subSeries.isNaNException for the array  ['b', 300, 100, 50, 50, 50, 50, 50, 500, 200, 100]" );
  
 });
