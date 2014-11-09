@@ -23,8 +23,8 @@ var subSeries =  (function() {
 	function reduce( myarray ) {
 		var prev, val, ix, tmp;
 		return myarray.reduce( function( prev, val, ix, tmp ) {
-			if( isNaN( parseInt( val, 10 ) ) ) throw( "Non-numeric value encountered, exiting." );
-			if( parseInt( val, 10 ) < 0 ) throw( "Negative value encountered, exiting." ); 
+			if( isNaN( parseInt( prev, 10 ) ) ) throw new isNaNException( prev );
+			if( parseInt( prev, 10 ) < 0 ) throw new negativeNumberException( prev ); 
 			return prev + val;
 		} );
 	}
@@ -37,7 +37,27 @@ var subSeries =  (function() {
 		return res;
 	}
 	
+	function negativeNumberException( val ){
+		this.value = val;
+		this.message = "Negative number encountered.";
+		this.toString = function() {
+		      return this.value + this.message;
+		 };
+	}
+	
+	function isNaNException( val ){
+		this.value = val;
+		this.message = "Non-numeric value encountered.";
+		this.toString = function() {
+		      return this.value + this.message;
+		 };		
+	}
+	
 	return {
-		getSubSeries : getSubSeries
+		getSubSeries:getSubSeries,
+		negativeNumberException:negativeNumberException,
+		isNaNException : isNaNException,
+		reduce: reduce,
+		getLongest : getLongest
 		};
 }());

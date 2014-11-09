@@ -1,18 +1,15 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-	<head>
-	<title>Test of subSeries code</title>
-	
-	<script src="subseries.js"></script>
-	
-	<script>
-		var thresh = 500, arr = [100, 300, 100, 50, 50, 50, 50, 50, 500, 200, 100];
-		console.log( "Longest subseries with sum under " + thresh + " : " + subSeries.getSubSeries( arr, thresh ) ); 
-	</script>	
-		
-	</head>
-	<body>
-		
-	</body>
+<head>
+<meta charset="utf-8">
+<title>Test of subSeries code</title>
+<link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.15.0.css">
+</head>
+<body>
+<div id="qunit"></div>
+<div id="qunit-fixture"></div>
+<script src="http://code.jquery.com/qunit/qunit-1.15.0.js"></script>
+<script src="subseries.js"></script>
+<script src="tests.js"></script>
+</body>
 </html>
-
