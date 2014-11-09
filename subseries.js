@@ -37,21 +37,26 @@ var subSeries =  (function() {
 		return res;
 	}
 	
-	function negativeNumberException( val ){
+	function Exception( val ){
 		this.value = val;
-		this.message = "Negative number encountered.";
-		this.toString = function() {
-		      return this.value + this.message;
-		 };
-	}
-	
-	function isNaNException( val ){
-		this.value = val;
-		this.message = "Non-numeric value encountered.";
+		this.message = "Base error";
 		this.toString = function() {
 		      return this.value + this.message;
 		 };		
 	}
+	
+	function negativeNumberException( val ){
+		this.message = "Negative number encountered.";
+	}
+	negativeNumberException.prototype = new Exception();
+	negativeNumberException.prototype.constructor = negativeNumberException;
+	
+	
+	function isNaNException( val ){
+		this.message = "Non-numeric value encountered.";
+	}
+	isNaNException.prototype = new Exception();
+	isNaNException.prototype.constructor = isNaNException;
 	
 	return {
 		getSubSeries:getSubSeries,
