@@ -42,6 +42,11 @@ arr = [800, 300, 100, 50, 50, 50, 50, 50, 500, 200, 100];
 result = subSeries.getSubSeries( arr, thresh );
 assert.ok( result.equals([100, 50, 50, 50, 50, 50]), "Passed! A single element over the threshold does not bomb the function." );
 
+arr = [10,10,10,10,10,10,10,10,10,10];
+result = subSeries.getSubSeries( arr, thresh );
+assert.ok( result.equals([10,10,10,10,10,10,10,10,10,10]), "Shortcut answer when the full array sum is under the threshold." );
+
+
 
 arr = [-100, 300, 100, 50, 50, 50, 50, 50, 500, 200, 100],
 

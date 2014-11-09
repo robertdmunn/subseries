@@ -3,8 +3,10 @@ var subSeries =  (function() {
 	function getSubSeries( arr, threshold ) {
 		var i, o, ser = [ ], tmpSum, j, tmp = [];
 		
-		if ( reduce( arr ) <= threshold )
+		if ( reduce( arr ) <= threshold ){
+			console.log("Skip processing and return full array as the solution." );
 			return arr;
+		}
 
 		arr.forEach( function( o, i, arr ) {
 			j = 1;
