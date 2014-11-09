@@ -38,6 +38,10 @@ assert.ok( result.equals([100, 50, 50, 50, 50, 50]), "Passed! Longest series in 
 assert.ok( subSeries.reduce([50,50,100,210,200]) === 610, "Reduce function adds arrays correctly." );
 assert.ok( subSeries.getLongest(arraySet).equals( [10,10,10]), "Longest function returns the longest array in a collection." );
 
+arr = [800, 300, 100, 50, 50, 50, 50, 50, 500, 200, 100];
+result = subSeries.getSubSeries( arr, thresh );
+assert.ok( result.equals([100, 50, 50, 50, 50, 50]), "Passed! A single element over the threshold does not bomb the function." );
+
 
 arr = [-100, 300, 100, 50, 50, 50, 50, 50, 500, 200, 100],
 

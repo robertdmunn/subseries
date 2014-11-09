@@ -9,8 +9,9 @@ var subSeries =  (function() {
 		arr.forEach( function( o, i, arr ) {
 			j = 1;
 			tmp = arr.slice( i, arr.length );
+			if( tmp[0] > threshold ) return;
 			tmpSum = reduce( tmp );
-			while ( tmpSum > threshold && tmp[ 0 ] <= threshold ) {
+			while ( tmpSum > threshold ) {
 				tmp = tmp.slice( 0, arr.length - j );
 				tmpSum = reduce( tmp );
 				j++;
