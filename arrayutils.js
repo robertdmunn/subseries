@@ -65,7 +65,7 @@ Array.prototype.checkForNegative = function(){
 
 // get the longest subseries of a non-negative numeric array whose sum is equal to or less than the given threshold value
 Array.prototype.getSubSeries = function( threshold ){
-	var i, o, ser = [ ], tmpSum, tmp = [], ixNeg, self = this, tmpResult, j=0, result, maxSum=0;
+	var i, o, ser = [ ], tmpSum, tmp = [], ixNeg, self = this, tmpResult, j=1, result, maxSum=0;
 	
 	if ( this.sum() <= threshold ){
 		return this;
