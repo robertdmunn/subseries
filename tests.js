@@ -10,14 +10,14 @@ var thresh = 500,
 	arr = [100, 300, 100, 50, 50, 50, 50, 50, 500, 200, 100],
 	result = arr.getSubSeries( thresh );
 
-assert.ok( result.equals([100, 50, 50, 50, 50, 50]), "Passed! Longest series in [100, 300, 100, 50, 50, 50, 50, 50, 500, 200, 100] is [100, 50, 50, 50, 50, 50]." );
+assert.ok( result.equals([100, 50, 50, 50, 50, 50]), "Longest series in [100, 300, 100, 50, 50, 50, 50, 50, 500, 200, 100] is [100, 50, 50, 50, 50, 50]." );
 assert.ok( [50,50,100,210,200].sum() === 610, "Reduce function adds arrays correctly." );
 result = arraySet.getLongest();
 assert.ok( result[0].equals( [10,10,10]), "Longest function returns the longest array in a collection." );
 
 arr = [800, 300, 100, 50, 50, 50, 50, 50, 500, 200, 100];
 result = arr.getSubSeries( thresh );
-assert.ok( result.equals([100, 50, 50, 50, 50, 50]), "Passed! A single element over the threshold does not bomb the function." );
+assert.ok( result.equals([100, 50, 50, 50, 50, 50]), "A single element over the threshold does not bomb the function." );
 
 arr = [10,10,10,10,10,10,10,10,10,10];
 result = arr.getSubSeries( thresh );
@@ -31,6 +31,10 @@ assert.ok( result.equals([300,100,100]), "When multiple subseries are the same l
 arr = [100,100,200,200,100,100,200,300,100,100];
 result = arr.getSubSeries( thresh );
 assert.ok( result.equals([[100,200,200], [200,200,100], [300,100,100]]), "When multiple subseries are the same length and have the same sum, return them all." );
+
+arr = [-10, 400, 100, 50, 50, 50, 50, 50, 500, 200, 100],
+result = arr.getSubSeries( thresh, true );
+assert.ok( result.equals([100, 50, 50, 50, 50, 50]), "Negative numbers can be allowed by optional argument." );
 
 
 arr = [-100, 300, 100, 50, 50, 50, 50, 50, 500, 200, 100],

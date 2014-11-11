@@ -64,15 +64,16 @@ Array.prototype.checkForNegative = function(){
 };
 
 // get the longest subseries of a non-negative numeric array whose sum is equal to or less than the given threshold value
-Array.prototype.getSubSeries = function( threshold ){
+Array.prototype.getSubSeries = function( threshold, allowNegatives ){
 	var i, o, ser = [ ], tmpSum, tmp = [], ixNeg, self = this, tmpResult, j=1, result, maxSum=0;
 	
 	if ( this.sum() <= threshold ){
 		return this;
 	}
-	ixNeg = this.checkForNegative();
-	if( ixNeg >= 0 )  throw new NegativeNumberException();
-
+	if( allowNegatives !== true ){
+		ixNeg = this.checkForNegative();
+		if( ixNeg >= 0 )  throw new NegativeNumberException();
+	}
 	this.forEach( function( o, i, self ) {
 		tmp = self.slice( i, self.length );
 		if( tmp[0] > threshold ) return;
