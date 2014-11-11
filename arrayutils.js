@@ -35,9 +35,17 @@ Array.prototype.sum = function(){
 };
 
 Array.prototype.getLongest = function(){
-	var o, i, res=[];
+	var o, i, j=1, res=[[]];
 	this.forEach( function( o, i ) {
-		if ( o.length > res.length ) res = o;
+		if ( o.length > res[0].length ){
+			res=[];
+			res[0] = o;
+			j=1;
+		}
+		else if ( o.length === res[0].length ){
+			res[j] = o;
+			j++;
+		}
 	});
 	return res;
 };
@@ -57,26 +65,42 @@ Array.prototype.checkForNegative = function(){
 
 // get the longest subseries of a non-negative numeric array whose sum is equal to or less than the given threshold value
 Array.prototype.getSubSeries = function( threshold ){
-	var i, o, ser = [ ], tmpSum, j, tmp = [], ixNeg, self = this;
+	var i, o, ser = [ ], tmpSum, tmp = [], ixNeg, self = this, tmpResult, j=0, result, maxSum=0;
 	
 	if ( this.sum() <= threshold ){
-		console.log("Skip processing and return full array as the solution." );
 		return this;
 	}
 	ixNeg = this.checkForNegative();
 	if( ixNeg >= 0 )  throw new NegativeNumberException();
 
 	this.forEach( function( o, i, self ) {
-		j = 1;
 		tmp = self.slice( i, self.length );
 		if( tmp[0] > threshold ) return;
 		tmpSum = tmp.sum();
 		while ( tmpSum > threshold ) {
-			tmp = tmp.slice( 0, self.length - j );
+			tmp = tmp.slice( 0, tmp.length - 1 );
 			tmpSum = tmp.sum();
-			j++;
 		}
 		ser[i] = tmp;
-	} );
-	return ser.getLongest();	
+	});
+	tmpResult = ser.getLongest();
+	if( tmpResult.length > 1 ){
+		tmpResult.forEach( function( o, i, tmpResult ){
+			if( o.sum() > maxSum ){
+				maxSum = o.sum();
+				j=1;
+				result=[];
+				result[0]=o;
+			}
+			else if( o.sum() === maxSum ){
+				result[j] = o;
+				j++;
+			}
+		});
+		if( result.length === 1 ) return result[0];
+		else return result;
+
+	}else{
+		return tmpResult[0];
+	}
 };
