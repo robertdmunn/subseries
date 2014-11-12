@@ -40,10 +40,9 @@ Array.prototype.getSubSeries = function( threshold, allowNegatives ){
 		if( res.length === 1 ) return res[0];
 		else return res;
 	};
-	
-	if ( this.sum() <= threshold ){
-		return this;
-	}
+
+	if ( this.sum() <= threshold ) return this;
+
 	if( allowNegatives !== true ){
 		ixNeg = this.checkForNegative();
 		if( ixNeg >= 0 )  throw new NegativeNumberException();
@@ -58,6 +57,6 @@ Array.prototype.getSubSeries = function( threshold, allowNegatives ){
 		}
 		ser[i] = tmp;
 	});
-	
+
 	return getLongest( ser );
 };
