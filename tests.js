@@ -1,4 +1,30 @@
+//Array.prototype.equals
+//http://stackoverflow.com/questions/7837456/comparing-two-arrays-in-javascript
+// attach the .equals method to Array's prototype to call it on any array
+//only used for QUnit tests
+Array.prototype.equals = function (array) {
+    // if the other array is a falsy value, return
+    if (!array)
+        return false;
 
+    // compare lengths - can save a lot of time 
+    if (this.length != array.length)
+        return false;
+
+    for (var i = 0, l=this.length; i < l; i++) {
+        // Check if we have nested arrays
+        if (this[i] instanceof Array && array[i] instanceof Array) {
+            // recurse into the nested arrays
+            if (!this[i].equals(array[i]))
+                return false;       
+        }           
+        else if (this[i] != array[i]) { 
+            // Warning - two different object instances will never be equal: {x:20} != {x:20}
+            return false;   
+        }           
+    }       
+    return true;
+};
 
 QUnit.test( "subSeries Tests", function( assert ) {
 var thresh = 500, 
@@ -12,8 +38,6 @@ var thresh = 500,
 
 assert.ok( result.equals([100, 50, 50, 50, 50, 50]), "Longest series in [100, 300, 100, 50, 50, 50, 50, 50, 500, 200, 100] is [100, 50, 50, 50, 50, 50]." );
 assert.ok( [50,50,100,210,200].sum() === 610, "Reduce function adds arrays correctly." );
-result = arraySet.getLongest();
-assert.ok( result[0].equals( [10,10,10]), "Longest function returns the longest array in a collection." );
 
 arr = [800, 300, 100, 50, 50, 50, 50, 50, 500, 200, 100];
 result = arr.getSubSeries( thresh );
@@ -56,4 +80,12 @@ arr = [-100, 300, 100, 50, 50, 50, 50, 50, 500, 200, 100],
 		 IsNaNException,
 		 "raised error is an instance of IsNaNException for the array  ['b', 300, 100, 50, 50, 50, 50, 50, 500, 200, 100]" );
  
+ // test a big array 
+  arr=[];
+  for( var i = 0;i<100;i++ ){
+	  arr.push( parseInt( Math.random() * 100, 10 ) );
+  }
+  result = arr.getSubSeries( thresh );
+  assert.ok( result.length > 0, "Large array return a result." );
+  console.log(result);
 });
