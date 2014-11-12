@@ -1,7 +1,7 @@
 subseries
 =========
 
-***v 0.1.0***
+***v 1.0.0***
 
 Adam Cameron's array subseries challenge http://blog.adamcameron.me/2014/11/something-for-weekend-wee-code-quiz-in.html
 
