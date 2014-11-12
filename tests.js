@@ -82,7 +82,7 @@ arr = [-100, 300, 100, 50, 50, 50, 50, 50, 500, 200, 100],
  
  // test a big array 
   arr=[];
-  for( var i = 0;i<100;i++ ){
+  for( var i = 0;i<1000;i++ ){
 	  arr.push( parseInt( Math.random() * 100, 10 ) );
   }
   result = arr.getSubSeries( thresh );

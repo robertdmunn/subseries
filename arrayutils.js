@@ -22,7 +22,7 @@ Array.prototype.checkForNegative = function(){
 
 // get the longest subseries of a non-negative numeric array whose sum is equal to or less than the given threshold value
 Array.prototype.getSubSeries = function( threshold, allowNegatives ){
-	var i, o, ser = [ ], tmpSum, tmp = [], ixNeg, self = this, tmpResult, j=1, result, maxSum=0;
+	var i, o, ser = [ ], tmpSum, tmp = [], ixNeg, self = this, tmpResult, j, result, maxSum=0;
 
 	getLongest = function( array ){
 		var o, i, j=1, res=[[]];
@@ -49,13 +49,18 @@ Array.prototype.getSubSeries = function( threshold, allowNegatives ){
 	}
 	this.forEach( function( o, i, self ) {
 		tmp = self.slice( i, self.length );
-		if( tmp[0] > threshold ) return;
-		tmpSum = tmp.sum();
-		while ( tmpSum > threshold ) {
-			tmp = tmp.slice( 0, tmp.length - 1 );
-			tmpSum = tmp.sum();
+		if( tmp.sum() <=threshold ){
+			ser[i] = tmp;
+			return;
 		}
-		ser[i] = tmp;
+		tmpSum = tmp[0];
+		if( tmpSum > threshold ) return;
+		j=1;
+		while( tmpSum <= threshold && j <= self.length ){
+			tmpSum += tmp[j];
+			j++;
+		}
+		ser[i] = tmp.slice(0,j-1);
 	});
 
 	return getLongest( ser );
