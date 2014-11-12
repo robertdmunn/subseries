@@ -1,9 +1,11 @@
 subseries
 =========
 
-***v 0.0.2***
+***v 0.1.0***
 
 Adam Cameron's array subseries challenge http://blog.adamcameron.me/2014/11/something-for-weekend-wee-code-quiz-in.html
+
+See the link for updated rules and comments.
 
 Problem
  
